@@ -50,3 +50,5 @@ def menu():
         
         
 menu()
+
+print("Muchisimas gracias por usar esta calculadora :))")
