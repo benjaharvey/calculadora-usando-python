@@ -22,5 +22,10 @@ def agregarContacto():
     
     print("Contacto añadido exitosamente!\n")
     
-agregarContacto()
+    
+    
+def mostrarContactos():
+  with open("archivoContactos.txt", "r") as archivoContactos:
+    for linea in archivoContactos:
+      print(linea)
 
