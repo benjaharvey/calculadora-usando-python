@@ -21,7 +21,6 @@ def agregarContacto():
     
     print("Contacto almacenado de forma exitosa")
  
-
  
 def buscarContacto():
   with open("archivoContactos.txt", "r") as archivoContacto:
@@ -37,30 +36,76 @@ def buscarContacto():
     if encontrado == False:
       print("No existe ese contacto!")
 
-
-
 def visualizarTodos():
-  with open("archivosContactos.txt", "r") as archivoContacto:
+  try:
+    print("Los contactos en el sistema son los siguientes\n")
     
-    try:
-     print("Los contactos que estan en el sistema son los siguientes: ")
-     for lineas in archivoContacto:
-      print(lineas)
+    with open("archivoContactos.txt", "r") as archivoContactos:
+      for linea in archivoContactos:
+        print(linea)
+  
+  
+  except FileNotFoundError:
+    print("No existe el archivo!")
+
+
+def  eliminarUnContacto():
+  with open("archivoContactos.txt", "r") as archivoContacto:
+    lineasArchivo = archivoContacto.readlines()
     
-    except FileNotFoundError:
-      print("El archivo no existe!, crealo usando la opcion 1")
+    eliminar = input("ingrese el numero telefonico que desea eliminar: ")
+    encontrado = False
+    
+    with open("archivoContactos.txt", "w") as archivoContactos:
+      for linea in lineasArchivo:
+        if eliminar not in linea:
+          archivoContactos.write(linea)
+        else:
+          encontrado = True
+      
+      if(encontrado == True):
+        print("Contacto eliminado de forma exitosa")
+      else:
+        print("No se encontro el contacto que desea eliminar")
+
+
+def eliminarTodos():
+  with open("archivosContactos.txt", "w") as archivoContacto:
+    pass
+  
+  print("Todos los contactos fueron eliminados!")
 
 def menu():
-  opcion = int(input("1- ingresar contacto; 2- buscar contacto; 3- visualizar todos los contactos; 4- eliminar contacto especifico; 5- eliminar todos: "))
-  
-  if opcion == 1:
-    agregarContacto()
-  
-  if opcion == 2:
-    buscarContacto()
-  
-  if opcion == 3:
-    visualizarTodos()    
+  while True:
+    print("-- /SISTEMA DE CONTACTOS HECHO EN PYTHON\ --")
+    
+    print("1; Agregar Contactos")
+    print("2; Visualizar Contactos")
+    print("3; Buscar Contacto")
+    print("4; Eliminar un contacto especifico")
+    print("5; Eliminar todos los contactos")
+    print("0; Salir del programa")
+    
+    opcion = input("Ingrese la opcion deseada: ")
+    
+    if opcion == 1:
+      agregarContacto()
+    
+    if opcion == 2:
+      visualizarTodos()
+    
+    if opcion == 3:
+      buscarContacto()
+    
+    if opcion == 4:
+      eliminarUnContacto()
+    
+    if opcion == 5:
+      eliminarTodos()
+    
+    if opcion == 6:
+      print("Gracias por usar mi programa :D -- Escrito por Benjamin J.A. Harvey usando de ayuda Copilot AI para la funcion de eliminar un contacto -- 30/1/25")
+      break
 
 
 menu()
